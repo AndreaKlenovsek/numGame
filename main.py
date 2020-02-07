@@ -21,9 +21,8 @@ def get_top_scores():
     return top_score_list
 
 
-
 top_scores = get_top_scores()
-secret = None
+
 user_attempts = None
 
 @app.route("/game", methods=["GET", "POST"])
@@ -40,6 +39,7 @@ def game():
 
         while True:
             guess = int(request.form.get("secret_number"))
+            secret = int(request.cookies.get("secret_number"))
             print(guess)
             print(secret)
 
@@ -93,12 +93,14 @@ def scores():
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    global secret
+
     global user_attempts
     user_attempts = 0
     secret = random.randint(1, 5)
     if request.method == "GET":
-        return render_template("index.html")
+        response = make_response(render_template("index.html"))
+        response.set_cookie("secret_number", secret)
+        return response
     elif request.method == "POST":
         selection = str(request.form.get("game_choice"))
         print(selection)
