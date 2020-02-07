@@ -23,7 +23,7 @@ def get_top_scores():
 
 top_scores = get_top_scores()
 
-user_attempts = None
+user_attempts = 0
 
 @app.route("/game", methods=["GET", "POST"])
 
@@ -55,9 +55,11 @@ def game():
                 score_list.append(first_attempt.__dict__)
                 with open("score_list.txt", "w") as score_file:
                     score_file.write(json.dumps(score_list))
-                message = "You've guessed it - congratulations! It's number " + str(secret) + " Attempts needed: " + str(user_attempts)
+                message = "You've guessed it - congratulations! It's number " + str(secret)
                 response = make_response(render_template("success.html", message=message, name=user_name))
                 response.set_cookie("user_name", user_name)
+                response.set_cookie("user_date", str(datetime.datetime.now()))
+                response.set_cookie("user_attempts", str(user_attempts))
                 return response
             elif guess > secret:
                 user_attempts += 1
@@ -88,7 +90,9 @@ def get_all_scores():
 def scores():
     date, attempts, name = get_all_scores()
     cookie_user_name = request.cookies.get("user_name").capitalize()
-    return render_template("scores.html", date=date, name=name, attempts=attempts, cookie_user_name=cookie_user_name)
+    cookie_user_attempts = request.cookies.get("user_attempts")
+    cookie_user_date = request.cookies.get("user_date")
+    return render_template("scores.html", date=cookie_user_date, attempts=cookie_user_attempts, name=cookie_user_name)
 
 
 @app.route("/", methods=["GET", "POST"])
