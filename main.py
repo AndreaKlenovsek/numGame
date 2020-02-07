@@ -61,13 +61,13 @@ def game():
                 return response
             elif guess > secret:
                 user_attempts += 1
-                message = "Your guess is not correct... try something smaller"
+                message = "Your guess is not correct... try something smaller" + str(secret)
                 response = make_response(render_template("success.html", message=message, name=user_name))
                 response.set_cookie("user_name", user_name)
                 return response
             elif guess < secret:
                 user_attempts += 1
-                message = "Your guess is not correct... try something bigger"
+                message = "Your guess is not correct... try something bigger" + str(secret)
                 response = make_response(render_template("success.html", message=message, name=user_name))
                 response.set_cookie("user_name", user_name)
                 return response
@@ -96,7 +96,7 @@ def index():
     global secret
     global user_attempts
     user_attempts = 0
-    secret = random.randint(1, 30)
+    secret = random.randint(1, 5)
     if request.method == "GET":
         return render_template("index.html")
     elif request.method == "POST":
