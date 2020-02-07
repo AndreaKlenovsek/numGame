@@ -99,7 +99,7 @@ def index():
     secret = random.randint(1, 5)
     if request.method == "GET":
         response = make_response(render_template("index.html"))
-        response.set_cookie("secret_number", secret)
+        response.set_cookie("secret_number", str(secret))
         return response
     elif request.method == "POST":
         selection = str(request.form.get("game_choice"))
