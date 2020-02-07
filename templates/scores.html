@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scores</title>
+     <link rel="stylesheet" href="/static/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+<p class="main-title">Hello {{cookie_user_name}}, total scores are:</p>
+<div class="score-table">
+<ul>
+    <p>Attempts</p>
+{% for attempt in attempts %}
+<li>{{attempt}}</li>
+{% endfor %}
+</ul>
+    <ul>
+        <p>Names</p>
+ {% for name in name %}
+<li>{{name}}</li>
+{% endfor %}
+    </ul>
+        <ul>
+            <p>Dates</p>
+    {% for date in date %}
+<li>{{date}}</li>
+{% endfor %}
+</ul>
+</div>
+<div class="btn-spacing">
+ <a href="/" class="btn back">Go back to menu</a>
+<a href="/game" class="btn back">Go back to game</a>
+</div>
+</body>
+</html>

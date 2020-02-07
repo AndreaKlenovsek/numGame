@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+        <link rel="stylesheet" href="/static/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+<h1 class="main-title">Random number game</h1>
+<p>Please insert random number from 0 to 20</p>
+<form method="post" action="/game">
+    <input type="text" name="name" placeholder="Insert your name..." value={{name}}>
+    <input type="number" name="secret_number" placeholder="Insert a random number...">
+    <div class="btn-spacing">
+        <button type="submit" class="btn submit">SUBMIT</button>
+        <a href="/" class="btn back">Go back to menu</a>
+        <a href="/scores" class="btn see_scores">Scores</a>
+    </div>
+</form>
+</body>
+</html>
