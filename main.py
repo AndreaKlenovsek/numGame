@@ -28,13 +28,13 @@ top_scores = get_top_scores()
 @app.route("/game", methods=["GET", "POST"])
 
 def game():
+    user_attempts = 0
     if request.method == "GET":
-
         cookie_user_name = request.cookies.get("user_name").capitalize()
         return render_template("game.html", name=cookie_user_name)
     elif request.method == "POST":
         score_list = get_score_list()
-        user_attempts = 0
+
         user_name = request.form.get("name").capitalize()
 
         while True:
