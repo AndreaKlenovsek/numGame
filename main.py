@@ -28,9 +28,10 @@ top_scores = get_top_scores()
 @app.route("/game", methods=["GET", "POST"])
 
 def game():
-    user_attempts = 0
+
     if request.method == "GET":
         cookie_user_name = request.cookies.get("user_name").capitalize()
+
         return render_template("game.html", name=cookie_user_name)
     elif request.method == "POST":
         score_list = get_score_list()
@@ -40,9 +41,10 @@ def game():
         while True:
             guess = int(request.form.get("secret_number"))
             secret = int(request.cookies.get("secret_number"))
+            user_attempts = int(request.cookies.get("user_attempts"))
             print(guess)
             print(secret)
-
+            print(user_attempts)
 
             if guess == secret:
                 class ScoreResults():
@@ -59,19 +61,21 @@ def game():
                 response = make_response(render_template("success.html", message=message, name=user_name))
                 response.set_cookie("user_name", user_name)
                 response.set_cookie("user_date", str(datetime.datetime.now()))
-                response.set_cookie("user_attempts", str(user_attempts))
+
                 return response
             elif guess > secret:
                 user_attempts += 1
                 message = "Your guess is not correct... try something smaller" + str(secret)
                 response = make_response(render_template("success.html", message=message, name=user_name))
                 response.set_cookie("user_name", user_name)
+                response.set_cookie("user_attempts", str(user_attempts))
                 return response
             elif guess < secret:
                 user_attempts += 1
                 message = "Your guess is not correct... try something bigger" + str(secret)
                 response = make_response(render_template("success.html", message=message, name=user_name))
                 response.set_cookie("user_name", user_name)
+                response.set_cookie("user_attempts", str(user_attempts))
                 return response
 
 def get_all_scores():
@@ -98,12 +102,12 @@ def scores():
 @app.route("/", methods=["GET", "POST"])
 def index():
 
-    global user_attempts
     user_attempts = 0
     secret = random.randint(1, 5)
     if request.method == "GET":
         response = make_response(render_template("index.html"))
         response.set_cookie("secret_number", str(secret))
+        response.set_cookie("user_attempts", str(user_attempts))
         return response
     elif request.method == "POST":
         selection = str(request.form.get("game_choice"))

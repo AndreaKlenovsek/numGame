@@ -1,1 +1,1 @@
-[{"date": "2020-02-07 16:43:28.077000", "attempts": 3, "name": "Gabba"}, {"date": "2020-02-07 16:49:17.875000", "attempts": 1, "name": "Gabba"}, {"date": "2020-02-07 17:05:40.204000", "attempts": 2, "name": "Jabba"}]
+[{"date": "2020-02-07 16:43:28.077000", "attempts": 3, "name": "Gabba"}, {"date": "2020-02-07 16:49:17.875000", "attempts": 1, "name": "Gabba"}, {"date": "2020-02-07 17:05:40.204000", "attempts": 2, "name": "Jabba"}, {"date": "2020-02-07 18:43:32.169000", "attempts": 0, "name": "Jabba"}, {"date": "2020-02-07 18:46:01.963000", "attempts": 0, "name": "Jabba"}]
