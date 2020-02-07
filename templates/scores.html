@@ -7,23 +7,35 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
-<p class="main-title">Hello {{cookie_user_name}}, total scores are:</p>
+<p class="main-title">Hello
+    {% if name is string %}
+    {{name}}
+    {% else %}
+    {{name|join(', ') }}{% endif %}, total scores are:</p>
 <div class="score-table">
 <ul>
     <p>Attempts</p>
-
-<li>{{attempts}}</li>
-
+{% if attempts is string %}
+    <li>{{ attempts}}</li>
+    {% else %}
+<li>{{ attempts|join(', ') }}</li>
+{% endif %}
 </ul>
     <ul>
         <p>Names</p>
-<li>{{name}}</li>
+        {% if name is string %}
+        <li>{{name}}</li>
+        {% else %}
+<li>{{ name|join(', ') }}</li>
+        {% endif %}
     </ul>
         <ul>
             <p>Dates</p>
-
-<li>{{date}}</li>
-
+ {% if date is string %}
+            <li>{{date}}</li>
+             {% else %}
+<li>{{ date|join(', ') }}</li>
+{% endif %}
 </ul>
 </div>
 <div class="btn-spacing">
